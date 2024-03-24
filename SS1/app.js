@@ -22,3 +22,5 @@ Yêu cầu:
 Function này trả về mảng mới chứa các học sinh phù hợp với điều kiện)
 - Cập nhật và in ra mảng mới.
 */
+console.log(students.find(obj => obj.id == 2));
+console.log(students.findIndex(obj => obj.id == 2));
