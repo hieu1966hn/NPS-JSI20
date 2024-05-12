@@ -37,15 +37,41 @@ const taskList = document.getElementById("taskList"); // ul
 ////// Liệt kê các hàm cần sử dụng để hoàn thành todolist
 
 //// Hiển thị toàn bộ task mới nhất từ firestore ra UI
+const renderTasks = (tasks) => {
+  taskList.innerHTML = "";
+  tasks.forEach((task) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+    <span>${task.description}</span>
+    <button class="deleteBtn" data-id="${task.id}">Xóa</button>
+    `;
+
+    taskList.appendChild(li);
+    //// Xử lý sự kiện xóa task.
+  });
+};
 
 //// Cập nhật dữ liệu mới nhất từ firestore.
+const getTasks = async () => {
+  const querySnapshot = await getDocs(collection(db, "tasks"));
+  console.log("querySnapshot: ", querySnapshot); // Đang là 1 mảng dữ liệu toàn bộ document từ firestore
+
+  const tasks = querySnapshot.docs.map((doc) => ({
+    id: doc.id, // Phục vụ tính năng: tìm, xóa, hoàn thành hoặc cập nhật.
+    description: doc.data().description,
+  }));
+
+  console.log("tasks: ", tasks);
+
+  renderTasks(tasks); // Cập nhật lại giao diện dựa trên dữ liệu mới nhất từ firestore
+};
 
 //// Thêm 1 task vào trong firebase firestore
-const addTask = async (description)=>{
-    await addDoc(collection(db,"tasks"), {description});
-    
-    getTasks(); // Lấy dữ liệu mới nhất từ DB về web.
-}
+const addTask = async (description) => {
+  await addDoc(collection(db, "tasks"), { description });
+
+  getTasks(); // Lấy dữ liệu mới nhất từ DB về web.
+};
 
 //// Xóa 1 task trong firebase firestore
 
@@ -55,6 +81,7 @@ addTaskBtn.addEventListener("click", () => {
   console.log("description: ", description);
   if (description !== "") {
     addTask(description); // Chỉ lưu dữ liệu khi task không rỗng. Gọi hàm thêm 1 task vào trong DB.
+    taskInput.value = ""; // Xóa nội dung trong thẻ input sau khi bấm nút thêm.
   } else {
     alert("task rỗng!!!");
   }
