@@ -48,6 +48,11 @@ const renderTasks = (tasks) => {
 
     taskList.appendChild(li);
     //// Xử lý sự kiện xóa task.
+
+    const deleteBtn = li.querySelector(".deleteBtn");
+    deleteBtn.addEventListener("click", () => {
+      deleteTask(task.id); // Gọi hàm xóa 1 task khi biết id.
+    });
   });
 };
 
@@ -74,6 +79,20 @@ const addTask = async (description) => {
 };
 
 //// Xóa 1 task trong firebase firestore
+const deleteTask = (id) => {
+  const docRef = doc(db, "tasks", id);
+  console.log("docRef: ", docRef);
+  deleteDoc(docRef)
+    .then(() => {
+      console.log("Entire Document has been deleted successfully");
+
+      getTasks(); // Lấy dữ liêu mới nhất từ DB về dự án.
+    })
+    .catch((error) => {
+      console.log(error); // Nếu có lỗi logic thì sẽ hiển thị ở đây.
+    });
+};
+
 
 //// Lắng nghe sự kiện người dùng click nút "thêm"
 addTaskBtn.addEventListener("click", () => {
