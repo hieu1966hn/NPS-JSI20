@@ -43,7 +43,10 @@ const renderTasks = (tasks) => {
     const li = document.createElement("li");
     li.innerHTML = `
     <span>${task.description}</span>
-    <button class="deleteBtn" data-id="${task.id}">Xóa</button>
+    <div>
+      <button class="doneBtn" data-id="${task.id}">Xong</button>
+      <button class="deleteBtn" data-id="${task.id}">Xóa</button>
+    </div>
     `;
 
     taskList.appendChild(li);
@@ -105,3 +108,12 @@ addTaskBtn.addEventListener("click", () => {
     alert("task rỗng!!!");
   }
 });
+
+/*
+Đề bài bổ sung
+- Tạo thêm một nút "Hoàn thành" bên cạnh nút "xóa".
+- Người dùng bấm nút "xong" => làm mờ (opacity) và gạch ngang chữ của task đó
+- Trong DB khi hoàn thành rồi thì phải có thêm thuộc tính: status: true/false 
+khi chưa tick "hoàn thành".
+
+*/
