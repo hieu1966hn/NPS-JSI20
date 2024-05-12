@@ -115,5 +115,4 @@ addTaskBtn.addEventListener("click", () => {
 - Người dùng bấm nút "xong" => làm mờ (opacity) và gạch ngang chữ của task đó
 - Trong DB khi hoàn thành rồi thì phải có thêm thuộc tính: status: true/false 
 khi chưa tick "hoàn thành".
-
 */
