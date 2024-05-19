@@ -116,3 +116,4 @@ addTaskBtn.addEventListener("click", () => {
 - Trong DB khi hoàn thành rồi thì phải có thêm thuộc tính: status: true/false 
 khi chưa tick "hoàn thành".
 */
+
