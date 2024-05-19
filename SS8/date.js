@@ -18,8 +18,6 @@
 // let date4 = new Date("2024,05,19,16,26,00,00"); //// Thầy check lại
 // console.log("date4: ", date4);
 
-
-
 /////// Các phương thức của Date.
 //// Các phương thức get dữ liệu
 /*
@@ -36,12 +34,11 @@ getTime(): Trả về thời dạng mili giây.
 Ví dụ cụ thể:
 */
 
-
 // function get(){
 //  let date = new Date();
 //  let data = "Ngày trong tháng: " + date.getDate() + "<br />";
 //  data += "Ngày trong tuần: " + date.getDay() + "<br />";
-//  data += "Tháng trong năm: " + date.getMonth() + "<br />"; 
+//  data += "Tháng trong năm: " + date.getMonth() + "<br />";
 //  data += "Giờ: " + date.getHours() + "<br />";
 //  data += "Phút: " + date.getMinutes() + "<br />";
 //  data += "Giây: " + date.getMilliseconds() + "<br />";
@@ -50,7 +47,6 @@ Ví dụ cụ thể:
 // }
 
 // get();
-
 
 /*
 Set: thiết lập (đặt)
@@ -72,7 +68,6 @@ VD: cụ thể
 
 // set()
 
-
 /*
 Các phương thức khác.
 toDateString(): Chuyển đổi thời gian về dạng date string
@@ -86,18 +81,39 @@ valueOf(): Chuyển đổi thời gian về dạng nguyên thủy.
 Ví dụ minh họa
 */
 
-function getOther(){
-    let date = new Date();
-    let data = 'toDateString(): ' + date.toDateString() + "<br />";
-    data += "toISOString():" + date.toISOString() + "<br />";
-    data += "toJSON():" + date.toJSON() + "<br />";
-    data += "toLocaleDateString():" + date.toLocaleDateString() + "<br />";
-    data += "toLocaleTimeString():" + date.toLocaleTimeString() + "<br />";
-    data += "toString():" + date.toString() + "<br />";
-    data += "valueOf():" + date.valueOf() + "<br />";
+// function getOther(){
+//     let date = new Date();
+//     let data = 'toDateString(): ' + date.toDateString() + "<br />";
+//     data += "toISOString():" + date.toISOString() + "<br />";
+//     data += "toJSON():" + date.toJSON() + "<br />";
+//     data += "toLocaleDateString():" + date.toLocaleDateString() + "<br />";
+//     data += "toLocaleTimeString():" + date.toLocaleTimeString() + "<br />";
+//     data += "toString():" + date.toString() + "<br />";
+//     data += "valueOf():" + date.valueOf() + "<br />";
 
-    document.getElementById("result").innerHTML = data;
-    
+//     document.getElementById("result").innerHTML = data;
+
+// }
+
+// getOther();
+
+///// Chữa bài 1:
+const date = new Date(2020, 1, 20, 3, 12);
+console.log("date: ", date);
+
+/// Bài 2 + 3:
+function getDateAgo(date, days) {
+  const dayOfWeek = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
+  const targetDate = new Date(date);
+
+  // Giảm giá trị của ngày theo số ngày đã cho
+  targetDate.setDate(targetDate.getDate() - days);
+
+  //   Lấy ngày trong tuần
+  return dayOfWeek[targetDate.getDay()];
 }
 
-getOther();
+const today = new Date();
+console.log("today: ", today);
+console.log(getDateAgo(today, 1)); /// In ra ngày hôm qua SA.
+console.log(getDateAgo(today, 2)); /// In ra ngày hôm kia FR.
